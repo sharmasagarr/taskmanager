@@ -36,13 +36,14 @@
 // .catch((err) => {
 //   console.error('MongoDB connection failed:', err.message);
 // });
+
+// code to deploy on vercel
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import userRoutes from './routes/userRoutes.js';
 import taskRoutes from './routes/taskRoutes.js';
-import serverless from 'serverless-http';
 
 dotenv.config();
 
@@ -55,16 +56,18 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('Hello World from Vercel + Express!');
 });
 
 app.use('/api/users', userRoutes);
 app.use('/api/tasks', taskRoutes);
 
 // MongoDB connection
-mongoose.connect(process.env.DATABASE_URL)
+const MONGO_URI = process.env.DATABASE_URL;
+
+mongoose.connect(MONGO_URI)
   .then(() => console.log('✅ Connected to MongoDB'))
   .catch((err) => console.error('MongoDB connection failed:', err.message));
 
-// Export instead of listen
-export const handler = serverless(app);
+// ⚡ Export the app as a serverless function
+export default app;

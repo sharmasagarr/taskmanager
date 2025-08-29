@@ -14,13 +14,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vercel/node": "^5.3.17",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.0.1",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.1",
-    "nodemon": "^3.1.10",
-    "serverless-http": "^3.2.0"
+    "nodemon": "^3.1.10"
   }
 }
