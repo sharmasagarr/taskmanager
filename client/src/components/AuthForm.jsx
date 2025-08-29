@@ -23,7 +23,7 @@ const AuthForm = () => {
     setLoading(true);
     setError('');
 
-    const baseURL = import.meta.env.VITE_API_URL;
+    const baseURL = "https://taskmanager-beige-ten.vercel.app/api";
     const url = isLogin ? `${baseURL}/users/login` : `${baseURL}/users/signup`;
 
     const payload = isLogin
