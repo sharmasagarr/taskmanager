@@ -37,7 +37,7 @@ const TaskForm = () => {
         return;
     }
     formData.assignee = user.id;
-    const url = `${import.meta.env.VITE_API_URL}/tasks`;
+    const url = `https://taskmanager-beige-ten.vercel.app/api/tasks`;
 
     try {
       await axios.post(url, formData, {
