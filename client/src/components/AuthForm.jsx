@@ -23,7 +23,7 @@ const AuthForm = () => {
     setLoading(true);
     setError('');
 
-    const baseURL = "https://taskmanager-beige-ten.vercel.app/api";
+    const baseURL = "https://taskmanager-git-main-sagar-sharmas-projects-6f12e768.vercel.app/api";
     const url = isLogin ? `${baseURL}/users/login` : `${baseURL}/users/signup`;
 
     const payload = isLogin
