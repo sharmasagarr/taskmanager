@@ -37,7 +37,7 @@ const TaskForm = () => {
         return;
     }
     formData.assignee = user.id;
-    const url = `https://taskmanager-git-main-sagar-sharmas-projects-6f12e768.vercel.app/api/tasks`;
+    const url = `https://taskmanager-beige-ten.vercel.app/https://taskmanager-beige-ten.vercel.app/api/tasks`;
 
     try {
       await axios.post(url, formData, {
