@@ -109,7 +109,7 @@ const Home = () => {
     <div className="min-h-screen bg-gray-100 p-6 text-black">
       <div className="max-w-5xl mx-auto space-y-8">
         {/* Header */}
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
           <h1 className="text-3xl font-bold text-blue-700">Task DashBoard</h1>
           <div className="flex gap-3">
             <button
@@ -197,7 +197,7 @@ const Home = () => {
                     dateTo: '',
                 })
             }
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center gap-2 cursor-pointer"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex justify-center items-center gap-2 cursor-pointer"
           >
             <CiCircleRemove size={25} /> Remove Filters
           </button>
