@@ -262,5 +262,5 @@ T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                   
             else 
                 Label3.Text = "The given number is not prime"; 
         } 
-    } 
+    }
 }

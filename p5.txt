@@ -1,0 +1,143 @@
+a) Create Web Form to demonstrate use of Website Navigation controls. 
+GUI: 
+Web.sitemap 
+<?xml version="1.0" encoding="utf-8" ?> 
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" > 
+<siteMapNode url="Home.aspx" title="Home" description="Home page of our web site"> 
+<siteMapNode url="Contactus.aspx" title="Contactus" description="Contactus" /> 
+<siteMapNode url="Search.aspx" title="Search" description="Search" /> 
+</siteMapNode> 
+</siteMap>
+Program Code: 
+Home.aspx 
+SiteMapPath→ AutoFormat 
+Home (MENU) -> Choose Data Source and Select DataSource1 
+SiteMapDataSource->Refresh Schema 
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" 
+Inherits="P5A.WebForm1" %> 
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head runat="server"> 
+<title></title> 
+</head> 
+<body> 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                     
+IT-5220 
+<form id="form1" runat="server"> 
+<div> 
+<br /> 
+<br /> 
+<asp:Label ID="Label1" runat="server" Text="HOME"></asp:Label> 
+<br /> 
+<br /> 
+<br /> 
+<asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Names="Verdana" Font
+Size="0.8em" PathSeparator=" : "> 
+<CurrentNodeStyle ForeColor="#333333" /> 
+<NodeStyle Font-Bold="True" ForeColor="#990000" /> 
+<PathSeparatorStyle Font-Bold="True" ForeColor="#990000" /> 
+<RootNodeStyle Font-Bold="True" ForeColor="#FF8000" /> 
+</asp:SiteMapPath> 
+<br /> 
+<br /> 
+<asp:Menu ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1"> 
+</asp:Menu> 
+<br /> 
+<br /> 
+<asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" /> 
+</div> 
+</form> 
+</body> 
+</html> 
+Create Contactus.aspx and Search.aspx and add SiteMapPath to both pages 
+Contactus.aspx 
+GUI: 
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Contactus.aspx.cs" 
+Inherits="prac5_a.WebForm2" %> 
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head runat="server"> 
+<title></title> 
+</head> 
+<body> 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                     
+IT-5220 
+<form id="form1" runat="server"> 
+<div> 
+CONTACT US<br /> 
+<br /> 
+<asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Names="Verdana" Font
+Size="0.8em" PathSeparator=" : "> 
+<CurrentNodeStyle ForeColor="#333333" /> 
+<NodeStyle Font-Bold="True" ForeColor="#666666" /> 
+<PathSeparatorStyle Font-Bold="True" ForeColor="#1C5E55" /> 
+<RootNodeStyle Font-Bold="True" ForeColor="#1C5E55" /> 
+</asp:SiteMapPath> 
+</div> 
+</form> 
+</body> 
+</html> 
+Search.aspx 
+GUI: 
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Search.aspx.cs" 
+Inherits="prac5_a.WebForm3" %> 
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head runat="server"> 
+<title></title> 
+</head> 
+<body> 
+<form id="form1" runat="server"> 
+<div> 
+<asp:Label ID="Label1" runat="server" Text="SEARCH"></asp:Label> 
+<br /> 
+<br /> 
+<asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Names="Verdana" Font
+Size="0.8em" PathSeparator=" : "> 
+<CurrentNodeStyle ForeColor="#333333" /> 
+<NodeStyle Font-Bold="True" ForeColor="#7C6F57" /> 
+<PathSeparatorStyle Font-Bold="True" ForeColor="#5D7B9D" /> 
+<RootNodeStyle Font-Bold="True" ForeColor="#5D7B9D" /> 
+</asp:SiteMapPath> 
+</div> 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                     
+IT-5220 
+</form> 
+</body> 
+</html> 
+Output : 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                     
+IT-5220 
+b) Create a web application to demonstrate use of Master Page and content page. 
+GUI: 
+Program Code: 
+Master page: 
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" 
+Inherits="prac5_b.Site1" %> 
+<!DOCTYPE html> 
+<html> 
+<head runat="server"> 
+<title></title> 
+<asp:ContentPlaceHolder ID="head" runat="server"> 
+</asp:ContentPlaceHolder> 
+</head> 
+<body> 
+<form id="form1" runat="server"> 
+<div> 
+<h1>WElCOME</h1> 
+<h2>to</h2> 
+<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"> 
+</asp:ContentPlaceHolder> 
+<h4> AWP</h4> 
+</div> 
+</form> 
+</body> 
+</html> 
+Content Page: 
+<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" 
+CodeBehind="WebForm2.aspx.cs" Inherits="prac5_b.WebForm2" %> 
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"> 
+</asp:Content> 
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server"> 
+This is content page. 
+</asp:Content> 

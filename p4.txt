@@ -1,0 +1,229 @@
+a) Create a Registration form to demonstrate use of various validation controls. 
+GUI: 
+Program Code: 
+.aspx 
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" 
+Inherits="validation.WebForm1" %> 
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head runat="server"> 
+<title></title> 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                     
+IT-5220 
+</head> 
+<body id="txtemail"> 
+<form id="form1" runat="server"> 
+<div> 
+<asp:Label ID="Label1" runat="server" Text="Emp ID:"></asp:Label> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
+ nbsp; 
+<asp:TextBox ID="txtid" runat="server" ViewStateMode="Enabled"></asp:TextBox> 
+<asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txtid" 
+ErrorMessage="id must be in 1 to 10" ForeColor="#FF3300" MaximumValue="100" 
+MinimumValue="1" Type="Integer"></asp:RangeValidator> 
+<br /> 
+<br /> 
+<asp:Label ID="Label2" runat="server" Text="Emp Name:"></asp:Label> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<asp:TextBox ID="txtname" runat="server" Height="16px" style="margin-left: 2px" 
+Width="121px"></asp:TextBox> 
+<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+ControlToValidate="txtname" ErrorMessage="name can't be empty" 
+ForeColor="#FF3300"></asp:RequiredFieldValidator> 
+<br /> 
+<br /> 
+<asp:Label ID="Label3" runat="server" Text=" "></asp:Label> 
+<asp:Label ID="Label4" runat="server" Text="Emp Address:"></asp:Label> 
+&nbsp;&nbsp;&nbsp;&nbsp; 
+<asp:TextBox ID="txtadr" runat="server" Height="23px" TextMode="MultiLine" 
+Width="118px"></asp:TextBox> 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                     
+IT-5220 
+<br /> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<br /> 
+<asp:Label ID="Label6" runat="server" Text="Email:"></asp:Label> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
+ nbsp;&nbsp;&nbsp;&nbsp; 
+<asp:TextBox ID="txte" runat="server" Width="120px"></asp:TextBox> 
+&nbsp; 
+<asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
+ControlToValidate="txte" ErrorMessage="email incorrect" ForeColor="Red" 
+ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([- 
+.]\w+)*"></asp:RegularExpressionValidator> 
+<br /> 
+<br /> 
+<asp:Label ID="Label7" runat="server" Text="Password:"></asp:Label> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<asp:TextBox ID="txtpw" runat="server" TextMode="Password"></asp:TextBox> 
+<br /> 
+<br /> 
+<asp:Label ID="Label8" runat="server" Text="Re-enter:"></asp:Label> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
+ nbsp; 
+<asp:TextBox ID="txttype" runat="server" TextMode="Password"></asp:TextBox> 
+&nbsp;<asp:CompareValidator ID="CompareValidator1" runat="server" 
+ControlToCompare="txtpw" ControlToValidate="txttype" ErrorMessage="password 
+mismatched" ForeColor="#CC6600"></asp:CompareValidator> 
+&nbsp;&nbsp; 
+<br /> 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                     
+IT-5220 
+<br /> 
+<asp:Button ID="btn1" runat="server" OnClick="btn1_Click" Text="Submit" /> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<asp:Button ID="btn2" runat="server" OnClick="btn2_Click" Text="Reset" /> 
+<br /> 
+<br /> 
+<br /> 
+<asp:ValidationSummary ID="ValidationSummary1" runat="server" DisplayMode="List" 
+ForeColor="#FF3300" HeaderText="Please correct following errors" 
+ShowMessageBox="True" 
+/> 
+<br /> 
+<asp:Label ID="Label9" runat="server" Text="ID"></asp:Label> 
+<br /> 
+<asp:Label ID="Label10" runat="server" Text="NAME"></asp:Label> 
+<br /> 
+<asp:Label ID="Label11" runat="server" Text="ADDRESS"></asp:Label> 
+<br /> 
+<asp:Label ID="Label12" runat="server" Text="EMAIL"></asp:Label> 
+<br /> 
+<br /> 
+<br /> 
+<br /> 
+<br /> 
+</div> 
+</form> 
+</body> 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                     
+IT-5220 
+</html> 
+.aspx.cs 
+using System; 
+using System.Collections.Generic; 
+using System.Linq; 
+using System.Web; 
+using System.Web.UI; 
+using System.Web.UI.WebControls; 
+namespace validation 
+{ 
+public partial class WebForm1 : System.Web.UI.Page 
+{ 
+protected void Page_Load(object sender, EventArgs e) 
+{ 
+} 
+protected void btn1_Click(object sender, EventArgs e) 
+{ 
+} 
+Label9.Text = "ID" + " : " + txtid.Text; 
+Label10.Text = "Name" + " : " + txtname.Text; 
+Label11.Text = "Add" + " : " + txtadr.Text; 
+Label12.Text = "Email" + " : " + txte.Text; 
+protected void btn2_Click(object sender, EventArgs e) 
+{ 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                     
+IT-5220 
+txtid.Text = ""; 
+txtname.Text = ""; 
+txtadr.Text = ""; 
+txte.Text = ""; 
+txtid.Focus(); 
+} 
+} 
+} 
+Output: 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                     
+IT-5220 
+b)   Create a web form to demonstrate use of Adrotator Control.   
+GUI: 
+Program Code: 
+.aspx 
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" 
+Inherits="_5216_5244_prac4B.WebForm1" %> 
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"><head runat="server"> 
+<title></title></head><body> 
+<form id="form1" runat="server"> 
+<div> 
+</div> 
+<p> 
+<asp:AdRotator ID="AdRotator1" runat="server" DataSourceID="XmlDataSource1" 
+Height="150px" OnAdCreated="AdRotator1_AdCreated" Width="150px" /><asp:XmlDataSource 
+ID="XmlDataSource1" runat="server" DataFile="~/XMLFile1.xml"> 
+</asp:XmlDataSource> 
+</p> 
+</form> 
+</body> 
+</html> 
+.xml 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                     
+IT-5220 
+<?xml version="1.0" encoding="utf-8" ?><Advertisements> 
+<Ad> 
+<ImageUrl>amazon.jpg</ImageUrl> 
+<NavigateUrl>https://www.amazon.in/</NavigateUrl> 
+<AlternateText>graphic card</AlternateText> 
+<Keyword>graphic card</Keyword> 
+<Impressions>20</Impressions> 
+</Ad> 
+<Ad> 
+<ImageUrl>meesho.jpg</ImageUrl> 
+<NavigateUrl>https://www.meesho.com/</NavigateUrl><AlternateText>motherboard</Alternate
+ Text> 
+<Keyword>motherboard</Keyword> 
+<Impressions>20</Impressions> 
+</Ad> 
+<Ad> 
+<ImageUrl>nike.jpg</ImageUrl> 
+<NavigateUrl>https://www.nike.com/in/</NavigateUrl> 
+<AlternateText>ram</AlternateText> 
+<Keyword>ram</Keyword> 
+<Impressions>20</Impressions> 
+</Ad> 
+</Advertisements> 
+Output: 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                     
+IT-5220 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                     
+IT-5220 
+c)Create web form to demonstrate User controls. 
+GUI: 
+Program Code: 
+.ascx 
+<%@PageLanguage="C#"AutoEventWireup="true"CodeBehind="WebForm1.aspx.cs"Inherits="prac4c.W
+ ebForm1"%> 
+<%@RegisterSrc="/footer.ascx"TagName="footer"TagPrefix="STfooter"%> 
+<!DOCTYPEhtml> 
+<htmlxmlns="http://www.w3.org/1999/xhtml"> 
+<headrunat="server"> 
+<title></title> 
+</head> 
+<body> 
+<formid="form1"runat="server"> 
+<div> 
+<asp:LabelID="Label1"runat="server"Font-Bold="True"Font-Size="XX
+Large"ForeColor="#FF33CC"Text="Advanced Web Development Technologies"></asp:Label> 
+<br/> 
+<br/> 
+<br/> 
+<br/> 
+</div> 
+<STfooter:footerID="footer1"runat="server"/> 
+</form> 
+<p> 
+&nbsp;</p> 
+</body> 
+</html> 
+.footer.ascx 
+<%@ControlLanguage="C#"AutoEventWireup="true"CodeBehind="footer.ascx.cs"Inherits="prac4c.
+ WebUserControl1"%> 
+<table> 
+<tr> 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                     
+IT-5220 
+<tdalign="center"style="font-family: Cambria; background-color: #00CCFF font-size: 14px; 
+text-decoration: 
+blink; color: #FF0000; font-weight: bold;">5220</td> 
+</tr> 
+</table> 

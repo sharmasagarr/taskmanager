@@ -1,0 +1,97 @@
+Aim:  Create a web application for inserting and deleting records from a database. 
+GUI: 
+Program Code:  
+WebForm.aspx 
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" 
+Inherits="Prac6.WebForm1" %> 
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head runat="server"> 
+<title></title> 
+</head> 
+<body> 
+<form id="form1" runat="server"> 
+<div> 
+<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox> 
+&nbsp;&nbsp; 
+<asp:TextBox ID="TextBox2" runat="server"></asp:TextBox> 
+<br /> 
+<br /> 
+<asp:Button ID="Button1" runat="server" Text="View" onClick="Button1_Click"/> 
+<asp:Button ID="Button2" runat="server" Text="Insert" onClick="Button2_Click"/> 
+<asp:Button ID="Button3" runat="server" Text="Update" onClick="Button3_Click"/> 
+<asp:Button ID="Button4" runat="server" Text="Delete" onClick="Button4_Click"/> 
+T.Y.I.T Sem–V P-III- Advanced Web Development Technologies                                                       
+ IT-5220  
+<br /> 
+<br /> 
+<asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource1" 
+AutoGenerateColumns="False" DataKeyNames="id"> 
+<Columns> 
+<asp:BoundField DataField="id" HeaderText="id" ReadOnly="True" 
+SortExpression="id"></asp:BoundField> 
+<asp:BoundField DataField="name" HeaderText="name" 
+SortExpression="name"></asp:BoundField> 
+</Columns> 
+</asp:GridView> 
+<br /> 
+<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ 
+ConnectionStrings:EmployeeDBConnectionString %>" SelectCommand="SELECT * FROM 
+[empdb]"></asp:SqlDataSource> 
+<br /> 
+</div> 
+</form> 
+</body> 
+</html> 
+WebForm.aspx.cs 
+using System; 
+using System.Collections.Generic; 
+using System.Data.SqlClient; 
+using System.Linq; 
+using System.Web; 
+using System.Web.UI; 
+using System.Web.UI.WebControls; 
+namespace PRAC6 
+{ 
+public partial class WebForm1 : System.Web.UI.Page 
+{ 
+SqlCommand co = new SqlCommand(); 
+SqlDataReader ds; 
+SqlDataSource s = new SqlDataSource(); 
+protected void Page_Load(object sender, EventArgs e) 
+{ 
+s.ConnectionString = "Data Source=COMP10\\TANVI;Initial Catalog = Demo; 
+Integrated Security = True; "; 
+} 
+protected void Button1_Click(object sender, EventArgs e) 
+{ 
+s.SelectCommand = "Select * from empdb"; 
+GridView1.DataBind(); 
+} 
+protected void Button2_Click(object sender, EventArgs e) 
+{ 
+SqlParameter p1 = new SqlParameter(), p2 = new SqlParameter(); 
+s.InsertParameters.Add("p1", System.Data.DbType.Int32, TextBox1.Text); 
+s.InsertParameters.Add("p2", System.Data.DbType.String, TextBox2.Text); 
+s.InsertCommand = "insert into empdb values(@p1,@p2);"; 
+s.Insert(); 
+} 
+protected void Button3_Click(object sender, EventArgs e) 
+{ 
+T.Y.I.T Sem–V P-III- Advanced Web Development Technologies                                                       
+ IT-5220  
+SqlParameter p1 = new SqlParameter(), p2 = new SqlParameter(); 
+s.UpdateParameters.Add("p2", System.Data.DbType.String, TextBox2.Text); 
+s.UpdateParameters.Add("p1", System.Data.DbType.Int32, TextBox1.Text); 
+s.UpdateCommand = "update empdb SET name=@p2 where Id=@p1;"; 
+s.Update(); 
+} 
+protected void Button4_Click(object sender, EventArgs e) 
+{ 
+SqlParameter p1 = new SqlParameter(), p2 = new SqlParameter(); 
+s.DeleteParameters.Add("p1", System.Data.DbType.Int32, TextBox1.Text); 
+s.DeleteCommand = "delete empdb where Id=@p1;"; 
+s.Delete(); 
+} 
+} 
+}
