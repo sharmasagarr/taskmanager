@@ -7,7 +7,7 @@ import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter basename="/taskmanager">
+    <BrowserRouter basename="/">
       <App />
       <Toaster position="top-center" reverseOrder={false} />
     </BrowserRouter>

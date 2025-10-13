@@ -1,0 +1,305 @@
+a)  Create a simple web page with various server controls to demonstrate setting and use 
+of their  properties. (example AutoPostBack). 
+GUI: 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                 IT-5220 
+ 
+ 
+ 
+Program Code: 
+.aspx 
+ 
+<!DOCTYPE html> 
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head runat="server"> 
+<title></title> 
+</head> 
+<body> 
+<form id="form1" runat="server"> 
+<div> 
+            JASMINA &amp; TANVI<br /> 
+<br /> 
+            Enter Name :<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox> 
+<br /> 
+<br /> 
+            Enter Age :<asp:TextBox ID="TextBox2" runat="server" Width="36px"></asp:TextBox> 
+<br /> 
+<br /> 
+<br /> 
+            Select Gender<asp:RadioButtonList ID="RadioButtonList1" runat="server"> 
+<asp:ListItem>Male</asp:ListItem> 
+<asp:ListItem>Female</asp:ListItem> 
+</asp:RadioButtonList> 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                 
+IT-5220 
+<br /> 
+Select Hobbies<asp:CheckBoxList ID="CheckBoxList1" runat="server"> 
+<asp:ListItem>Reading</asp:ListItem> 
+<asp:ListItem>Dancing</asp:ListItem> 
+<asp:ListItem>Playing</asp:ListItem> 
+</asp:CheckBoxList> 
+<br /> 
+<asp:Image ID="Image1" runat="server" Height="367px" ImageUrl="~/Sunflower image.jfif" 
+Width="267px" /> 
+<br /> 
+<br /> 
+<br /> 
+Select City :<asp:ListBox ID="ListBox1" runat="server"> 
+<asp:ListItem>Mumbai</asp:ListItem> 
+<asp:ListItem>Goa</asp:ListItem> 
+<asp:ListItem>Delhi</asp:ListItem> 
+</asp:ListBox> 
+<br /> 
+<br /> 
+Select Country : 
+<asp:DropDownList ID="DropDownList1" runat="server"> 
+<asp:ListItem>India</asp:ListItem> 
+<asp:ListItem>London</asp:ListItem> 
+<asp:ListItem>USA</asp:ListItem> 
+</asp:DropDownList> 
+<br /> 
+<br /> 
+<asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Display" /> 
+<br /> 
+<br /> 
+<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label> 
+<br /> 
+<asp:Label ID="Label2" runat="server" Text="Label"></asp:Label> 
+<br /> 
+<asp:Label ID="Label3" runat="server" Text="Label"></asp:Label> 
+<br /> 
+<asp:Label ID="Label4" runat="server" Text="Label"></asp:Label> 
+<br /> 
+<asp:Label ID="Label5" runat="server" Text="Label"></asp:Label> 
+<br /> 
+<asp:Label ID="Label6" runat="server" Text="Label"></asp:Label> 
+</div> 
+</form> 
+</body> 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                 IT-5220 
+ 
+</html> 
+ 
+ 
+.aspx.cs 
+ 
+using System; 
+using System.Collections.Generic; 
+using System.Linq; 
+using System.Web; 
+using System.Web.UI; 
+using System.Web.UI.WebControls; 
+ 
+namespace practical3_a 
+{ 
+    public partial class WebForm1 :System.Web.UI.Page 
+    { 
+        protected void Page_Load(object sender, EventArgs e) 
+        { 
+ 
+        } 
+ 
+        protected void Button1_Click(object sender, EventArgs e) 
+        { 
+            Label1.Text = TextBox1.Text; 
+            Label2.Text = TextBox2.Text; 
+            Label3.Text = RadioButtonList1.SelectedValue; 
+            Label4.Text = CheckBoxList1.SelectedValue; 
+            Label5.Text = ListBox1.SelectedItem.Value; 
+            Label6.Text = DropDownList1.SelectedItem.Value; 
+ 
+ 
+        } 
+    } 
+} 
+ 
+ 
+Output: 
+ 
+ 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                 
+IT-5220 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                 
+IT-5220 
+b) Create a simple application to demonstrate your vacation using calendar control. 
+GUI: 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                 
+IT-5220 
+Program Code: 
+.aspx 
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" 
+Inherits="Calender_3B.WebForm1" %> 
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head runat="server"> 
+<title></title> 
+</head> 
+<body> 
+<form id="form1" runat="server"> 
+<div> 
+<asp:Calendar ID="Calendar" runat="server" BackColor="#FFFFCC" 
+BorderColor="#FFCC66" 
+BorderWidth="1px" DayNameFormat="Shortest" Font-Names="Verdana" FontSize="8pt" 
+ForeColor="#663399" Height="200px" OnDayRender="Calendar_DayRender" 
+OnSelectionChanged="Calendar_SelectionChanged" Width="280px" Font-Size="8pt" 
+ShowGridLines="True"> 
+<DayHeaderStyle BackColor="#FFCC66" Height="1px" Font-Bold="True" /> 
+<NextPrevStyle Font-Size="9pt" ForeColor="#FFFFCC" /> 
+<OtherMonthDayStyle ForeColor="#CC9966" /> 
+<SelectedDayStyle BackColor="#CCCCFF" Font-Bold="True" /> 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                 
+IT-5220 
+<SelectorStyle BackColor="#FFCC66" /> 
+<TitleStyle BackColor="#990000" Font-Bold="True" Font-Size="9pt" 
+ForeColor="#FFFFCC" /> 
+<TodayDayStyle BackColor="#FFCC66" ForeColor="White" /> 
+</asp:Calendar> 
+<br /> 
+</div> 
+<asp:Label ID="Label1" runat="server"></asp:Label> 
+<br /> 
+<asp:Label ID="Label2" runat="server"></asp:Label> 
+<br /> 
+<asp:Label ID="Label3" runat="server"></asp:Label> 
+<br /> 
+<asp:Label ID="Label4" runat="server"></asp:Label> 
+<br /> 
+<br /> 
+<br /> 
+<asp:Button ID="btnDisplay" runat="server" OnClick="btnDisplay_Click" Text="DISPLAY" /> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<asp:Button ID="btnReset" runat="server" OnClick="Button2_Click" Text="RESET" /> 
+<br /> 
+</form> 
+</body> 
+</html> 
+.asps.cs 
+using System; 
+using System.Collections.Generic; 
+using System.Linq; 
+using System.Text; 
+using System.Web; 
+using System.Web.UI; 
+using System.Web.UI.WebControls; 
+namespace Calender_3B 
+{ 
+public partial class WebForm1 : System.Web.UI.Page 
+{ 
+protected void Calendar_SelectionChanged(object sender, EventArgs e) 
+{ 
+Label1.Text = "You have selected " + Calendar.SelectedDate.ToString(); 
+} 
+protected void btnDisplay_Click(object sender, EventArgs e) 
+{ 
+Calendar.Caption = " It's my calender"; 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                 
+IT-5220 
+Calendar.TitleFormat = TitleFormat.MonthYear; 
+Calendar.NextPrevFormat = NextPrevFormat.FullMonth; 
+Calendar.FirstDayOfWeek = FirstDayOfWeek.Monday; 
+Label2.Text = "Today's Date: " + Calendar.TodaysDate.ToShortDateString(); 
+TimeSpan d = new DateTime(2025, 8, 27) - DateTime.Now; 
+Label3.Text = "Days Remaining: " + d.Days.ToString(); 
+TimeSpan b = new DateTime(2025, 1, 1) - DateTime.Now; 
+Label4.Text = "Days Remaining: " + b.Days.ToString(); 
+} 
+protected void Calendar_DayRender(object sender, DayRenderEventArgs e) 
+{ 
+if (e.Day.Date.Day == 5 && e.Day.Date.Month == 9) 
+{ 
+e.Cell.BackColor = System.Drawing.Color.Crimson; 
+Label l6 = new Label(); 
+l6.Text = "<br>Teacher's Day!!"; 
+e.Cell.Controls.Add(l6); 
+} 
+if (e.Day.Date.Day == 27 && e.Day.Date.Month == 8) 
+{ 
+Calendar.SelectedDate = new DateTime(2023, 9, 19); 
+Calendar.SelectedDates.SelectRange(Calendar.SelectedDate, 
+Calendar.SelectedDate.AddDays(10)); 
+Label l7 = new Label(); 
+l7.Text = "<br>Bappa Morya!!"; 
+e.Cell.Controls.Add(l7); 
+Image g1 = new Image(); 
+g1.ImageUrl = "bappa.jpg"; 
+g1.Height = 30; 
+g1.Width = 30; 
+e.Cell.Controls.Add(g1); 
+} 
+} 
+protected void Button2_Click(object sender, EventArgs e) 
+{ 
+Label1.Text = " "; 
+Label2.Text = " "; 
+Label3.Text = " "; 
+Label4.Text = " "; 
+Calendar.SelectedDates.Clear(); 
+} 
+} 
+} 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                 
+IT-5220 
+Output: 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                 
+IT-5220 
+c) Demonstrate the use of treeview operations on the web form. 
+GUI: 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                 IT-5220 
+ 
+ 
+ 
+ Program Code: 
+.aspx (Parent Node) 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head runat="server"> 
+    <title></title> 
+</head> 
+<body> 
+    <form id="form1" runat="server"> 
+        <div> 
+            <asp:TreeView ID="TreeView1" runat="server"> 
+                <Nodes> 
+                    <asp:TreeNode Text="Home" Value="Home"> 
+                        <asp:TreeNode Text="Fashion" Value="Fashion" 
+NavigateUrl="~/Fashion.aspx"> 
+                            <asp:TreeNode Text="Clothes" Value="Clothes"></asp:TreeNode> 
+                            <asp:TreeNode Text="Winter Wear" Value="Winter 
+Wear"></asp:TreeNode> 
+                            <asp:TreeNode Text="Shoes" Value="Shoes"></asp:TreeNode> 
+                        </asp:TreeNode> 
+                    </asp:TreeNode> 
+                </Nodes> 
+            </asp:TreeView> 
+            <br /> 
+            <asp:TreeView ID="TreeView2" runat="server"> 
+                <Nodes> 
+                    <asp:TreeNode Text="Products" Value="Products"> 
+                        <asp:TreeNode Text="TV" Value="TV"></asp:TreeNode> 
+                        <asp:TreeNode Text="DVD " Value="DVD "></asp:TreeNode> 
+                        <asp:TreeNode Text="LCD" Value="LCD" 
+NavigateUrl="~/LCD.aspx"></asp:TreeNode> 
+                        <asp:TreeNode Text="DTH" Value="DTH"></asp:TreeNode> 
+                    </asp:TreeNode> 
+                </Nodes> 
+            </asp:TreeView> 
+        </div> 
+    </form> 
+</body> 
+T.Y.I.T Sem–V  P-III- Advanced Web Development Technologies                                 
+IT-5220 
+</html> 
+.aspx (Child Node) 
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head runat="server"> 
+<title></title> 
+</head> 
+<body> 
+<form id="form1" runat="server"> 
+<div> 
+<asp:Image ID="Image1" runat="server" ImageUrl="~/LCDs (1).jpeg" 
+Width="297px" /> 
+</div> 
+</form> 
+</body> 
+</html> 

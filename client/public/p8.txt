@@ -1,0 +1,222 @@
+A) Create a web application for inserting and deleting records from a database. 
+(Using Execute-Non Query). 
+GUI: 
+Program Code:  
+WebForm.aspx 
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" 
+Inherits="practical8a.WebForm1" %> 
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head runat="server"> 
+<title></title> 
+</head> 
+<body> 
+<form id="form1" runat="server"> 
+<div> 
+<asp:Label ID="fname" runat="server" Text="Enter Customer First 
+Name"></asp:Label>  
+<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>  
+<br />  
+<br />  
+<asp:Label ID="lname" runat="server" Text="Enter Customer Last Name"></asp:Label>  
+<asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>  
+<br />  
+<br />  
+<asp:Label ID="city" runat="server" Text="Enter Customer City"></asp:Label>  
+<asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>  
+<br />  
+T.Y.I.T Sem–V P-III- Advanced Web Development Technologies                                                       
+ IT-5220  
+<br />  
+<br />  
+<asp:Label ID="country" runat="server" Text="Enter Customer Country:"></asp:Label>  
+<asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>  
+<br />  
+<br />  
+<asp:Label ID="phone" runat="server" Text="Enter Customer Phone"></asp:Label>  
+<asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>  
+<br />  
+<br />  
+<asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Insert Record" 
+/>  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n
+ bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
+ p;&nbsp;&nbsp;  
+<asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Delete Record" 
+/>  
+<br />  
+<br />  
+<br />  
+<asp:Label ID="Label1" runat="server"></asp:Label> 
+</div> 
+</form> 
+</body> 
+</html> 
+WebForm.aspx.cs 
+using System; 
+using System.Collections.Generic; 
+using System.Linq; 
+using System.Web; 
+using System.Web.UI; 
+using System.Web.UI.WebControls; 
+using System.Configuration; 
+using System.Data.SqlClient; 
+using System.Drawing; 
+using System.Security.Policy; 
+namespace practical8a 
+{ 
+public partial class WebForm1 : System.Web.UI.Page 
+{ 
+protected void Page_Load(object sender, EventArgs e) 
+{ 
+} 
+protected void Button1_Click(object sender, EventArgs e) 
+{ 
+string connStr = 
+ConfigurationManager.ConnectionStrings["connStr"].ConnectionString; 
+SqlConnection con = new SqlConnection(connStr); 
+string InsertQuery = "insert into customer values(@fname, @lname, 
+@city,country, @phone)"; 
+SqlCommand cmd = new SqlCommand(InsertQuery, con); 
+T.Y.I.T Sem–V P-III- Advanced Web Development Technologies                                                        IT-5220  
+            cmd.Parameters.AddWithValue("@fname", TextBox1.Text); 
+ 
+            cmd.Parameters.AddWithValue("@lname", TextBox2.Text); 
+            cmd.Parameters.AddWithValue("@city", TextBox3.Text); 
+ 
+            cmd.Parameters.AddWithValue("@country", TextBox4.Text); 
+ 
+            cmd.Parameters.AddWithValue("@phone", TextBox5.Text); 
+ 
+            
+ 
+            Label1.Text = "Record Inserted Successfully."; 
+ 
+            con.Close(); 
+        } 
+ 
+        protected void Button2_Click(object sender, EventArgs e) 
+        { 
+            string connStr = 
+ConfigurationManager.ConnectionStrings["connStr"].ConnectionString; 
+ 
+            SqlConnection con = new SqlConnection(connStr); 
+ 
+            string InsertQuery = "delete from customer where FirstName=@fname"; 
+ 
+            SqlCommand cmd = new SqlCommand(InsertQuery, con); 
+ 
+            cmd.Parameters.AddWithValue("@fname", TextBox1.Text); 
+ 
+             
+ 
+             
+ 
+            Label1.Text = "Record Deleted Successfully."; 
+            con.Close(); 
+        } 
+    } 
+} 
+ 
+WebConfig 
+<?xml version="1.0" encoding="utf-8"?> 
+<!-- 
+  For more information on how to configure your ASP.NET application, please visit 
+  https://go.microsoft.com/fwlink/?LinkId=169433 
+  --> 
+<configuration> 
+ <connectionStrings> 
+  <add name ="connStr" 
+    connectionString="Data Source=COMP10\TANVI;Initial 
+Catalog=employeedb;Integrated Security=True"  
+    providerName="System.Data.SqlClient"/> 
+ </connectionStrings> 
+  <system.web> 
+    <compilation debug="true" targetFramework="4.7.2" /> 
+    <httpRuntime targetFramework="4.7.2" /> 
+  </system.web> 
+  <system.codedom> 
+    <compilers> 
+      <compiler language="c#;cs;csharp" extension=".cs" 
+type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.CSharpCodeProvider, 
+T.Y.I.T Sem–V P-III- Advanced Web Development Technologies                                                       
+ IT-5220  
+Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, 
+PublicKeyToken=31bf3856ad364e35" warningLevel="4" 
+compilerOptions="/langversion:default /nowarn:1659;1699;1701" /> 
+<compiler language="vb;vbs;visualbasic;vbscript" extension=".vb" 
+type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.VBCodeProvider, 
+Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, 
+PublicKeyToken=31bf3856ad364e35" warningLevel="4" 
+compilerOptions="/langversion:default /nowarn:41008 /define:_MYTYPE=\&quot;Web\&quot; 
+/optionInfer+" /> 
+</compilers> 
+</system.codedom> 
+</configuration> 
+OUTPUT: 
+T.Y.I.T Sem–V P-III- Advanced Web Development Technologies                                                       
+ IT-5220  
+T.Y.I.T Sem–V P-III- Advanced Web Development Technologies                                                       
+ IT-5220  
+B) Create a web application for user defined exception handling. 
+GUI: 
+Program Code:  
+WebForm.aspx 
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" 
+Inherits="prac8b.WebForm1" %> 
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head runat="server"> 
+<title></title> 
+</head> 
+<body> 
+<form id="form1" runat="server"> 
+<div> 
+<asp:Label ID="Label1" runat="server"></asp:Label> 
+<br /> 
+<br /> 
+<asp:Label ID="Label2" runat="server"></asp:Label> 
+</div> 
+</form> 
+</body> 
+</html> 
+WebForm.aspx.cs 
+using System; 
+using System.Collections.Generic; 
+using System.Linq; 
+using System.Web; 
+using System.Web.UI; 
+using System.Web.UI.WebControls; 
+namespace prac8b 
+{ 
+public partial class WebForm1 : System.Web.UI.Page 
+{ 
+protected void Page_Load(object sender, EventArgs e) 
+{ 
+try 
+{ 
+throw new UserDefinedException("New User Defined Exception"); 
+T.Y.I.T Sem–V P-III- Advanced Web Development Technologies                                                        IT-5220  
+            } 
+ 
+            catch (Exception ex) 
+            { 
+                Label1.Text = "Exception caught here" + ex.ToString(); 
+            } 
+            Label2.Text = "Final Statement that is executed"; 
+        } 
+        class UserDefinedException : Exception 
+        { 
+            public UserDefinedException(string str) 
+            { 
+                Console.WriteLine("User defined exception"); 
+            } 
+        } 
+        class HandledException 
+        { 
+            public static void Main() 
+            { 
+            } 
+        } 
+    } 
+} 
