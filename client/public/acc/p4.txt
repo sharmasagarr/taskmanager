@@ -1,0 +1,230 @@
+P4:a) Develop a simple JSP application to display values
+obtained from the use of intrinsic
+objects of various types.
+Downloaded by rajat dalal (rajat@gmail.com)
+lOMoARcPSD|59836559
+Solution:-
+Test.jsp
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+ <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF8">
+ <title>JSP Page</title>
+ </head>
+ <body>
+ <h1>Use of Intrinsic Objects in JSP</h1>
+<h1>Request Object </h1>
+ Query String <%=request.getQueryString() %><br>
+ Context Path <%=request.getContextPath() %><br>
+ Remote Host <%=request.getRemoteHost() %><br>
+<h1>Response Object </h1>
+ Character Encoding Type <%=response.getCharacterEncoding() %><br>
+ Content Type <%=response.getContentType() %><br>
+ Locale <%=response.getLocale() %><br>
+<h1>Session Object </h1>
+ ID <%=session.getId() %><br>
+ Creation Time <%=new java.util.Date(session.getCreationTime()) %><br>
+ Last Access Time<%=new java.util.Date(session.getLastAccessedTime())
+%><br>
+ </body>
+</html>
+OUTPUT:-
+Downloaded by rajat dalal (rajat@gmail.com)
+lOMoARcPSD|59836559
+P4:B)Develop a simple JSP application to pass values from
+one page to another with validations.
+(Name-txt, age-txt, hobbies-checkbox, email-txt, gender-radio
+button).
+Solution:-
+<html><head><title>User Information Page</title>
+</head>
+<body>
+<form action="Validate.jsp">
+ Enter Your Name<input type="text" name="name" ><br>
+ Enter Your Age<input type="text" name="age" ><br>
+ Select Hobbies
+<input type="checkbox" name="hob" value="Singing">Singing
+<input type="checkbox" name="hob" value="Reading">Reading Books
+Downloaded by rajat dalal (rajat@gmail.com)
+lOMoARcPSD|59836559
+<input type="checkbox" name="hob" value="Football">Playing
+Football<br>
+ Enter E-mail<input type="text" name="email" ><br>
+ Select Gender
+<input type="radio" name="gender" value="male">Male
+<input type="radio" name="gender" value="female">Female
+<input type="radio" name="gender" value="other">Other<br>
+<input type="hidden" name="error" value="">
+<input type="submit" value="Submit Form">
+</form>
+</body>
+</html>
+Validate.jsp
+<%--
+ Document : Validate
+ Created on : 31 Oct, 2022, 7:03:40 AM
+ Author : Utkarsh
+--%>
+<%@page contentType="text/html" pageEncoding="UTF-8"
+import="mypack.*" %>
+<html><head><title>JSP Page</title></head>
+<body>
+<h1>Validation Page</h1>
+<jsp:useBean id="obj" scope="request"
+ class="mypack.CheckerBean" >
+<jsp:setProperty name="obj" property="*"/>
+</jsp:useBean>
+<%if (obj.validate())
+{ %>
+<jsp:forward page="successful.jsp"/>
+<% }
+else {%>
+<jsp:include page="index.html"/>
+<%}%>
+<%=obj.getError() %>
+</body></html>
+Downloaded by rajat dalal (rajat@gmail.com)
+lOMoARcPSD|59836559
+CheckerBean.java
+package mypack;
+public class CheckerBean {
+private String name, age, hob, email, gender, error;
+public CheckerBean(){error="";}
+public void setName(String n){name=n;}
+public void setAge(String a){age=a;}
+public void setHob(String h){hob=h;}
+public void setEmail(String e){email=e;}
+public void setGender(String g){gender=g;}
+public void setError(String e){error=e;}
+public String getName(){return name;}
+public String getAge(){return age;}
+public String getHob(){return hob;}
+public String getEmail(){return email;}
+public String getGender(){return gender;}
+public String getError(){return error;}
+public boolean validate(){
+boolean res=true;
+if(name.trim().equals("")) {error+="<br>Enter First Name";res=false;}
+if(age.length() > 2 )
+{error+="<br>Age Invalid";res=false;}
+return res;
+ }
+}
+OUTPUT:-
+
+
+Downloaded by rajat dalal (rajat@gmail.com)
+lOMoARcPSD|59836559
+P4:C) Create a registration and login JSP application to
+register and authenticate the user based on username and
+password using JDBC.
+ Solution:-
+Index.html
+<html><head><title>New User Registration Page</title></head>
+<body>
+<form action="Register.jsp" >
+<h1> New User Registration Page</h1>
+ Enter User Name <input type="text" name="txtName" ><br>
+ Enter Password <input type="password" name="txtPass1" ><br>
+ Re-Enter Password<input type="password" name="txtPass2" ><br>
+ Enter Email<input type="text" name="txtEmail" ><br>
+ Enter Country Name <input type="text" name="txtCon" ><br>
+<input type="reset" ><input type="submit" value="REGISTER" >
+</form>
+</body>
+</html>
+Register.jsp
+<%--
+ Document : Register
+ Created on : 31 Oct, 2022, 7:32:40 AM
+ Author : Utkarsh
+--%>
+Downloaded by rajat dalal (rajat@gmail.com)
+lOMoARcPSD|59836559
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+
+ <%@page contentType="text/html" import="java.sql.*"%>
+<html><body>
+<h1>Registration JSP Page</h1>
+<%
+ String uname=request.getParameter("txtName");
+ String pass1 = request.getParameter("txtPass1");
+ String pass2 = request.getParameter("txtPass2");
+ String email = request.getParameter("txtEmail");
+ String ctry = request.getParameter("txtCon");
+ if(pass1.equals(pass2)){
+ try{
+ Class.forName("com.mysql.jdbc.Driver");
+ Connection con =
+DriverManager.getConnection("jdbc:mysql://localhost:3306/logindb");
+ PreparedStatement stmt = con.prepareStatement("insert into user values
+(?,?,?,?)");
+ stmt.setString(1, uname); stmt.setString(2, pass1);
+ stmt.setString(3, email); stmt.setString(4, ctry);
+ int row = stmt.executeUpdate();
+ if(row==1) { out.println("Registration Successful"); }
+ else {
+ out.println("Registration FFFFFAAAIIILLLL !!!!");
+ %><jsp:include page="Register.html" ></jsp:include>
+<%
+ }
+ }catch(Exception e){out.println(e);}
+ }
+ else
+ {
+ out.println("<h1>Password Mismatch</h1>");
+%>
+<jsp:include page="Register.html" ></jsp:include>
+<% }
+ %>
+</html>
+ </body>
+Downloaded by rajat dalal (rajat@gmail.com)
+lOMoARcPSD|59836559
+</html>
+Login.html
+<html>
+<body>
+<h1>Login Page</h1>
+<form action="Login.jsp" >
+ Enter User Name <input type="text" name="txtName" ><br>
+ Enter Password <input type="password" name="txtPass" ><br>
+<input type="reset" ><input type="submit" value="~~LOGIN~" >
+</form>
+</body>
+</html>
+Login.jsp
+<%@page contentType="text/html" import="java.sql.*"%>
+<html><body>
+<h1>Registration JSP Page</h1>
+<%
+ String uname=request.getParameter("txtName");
+ String pass = request.getParameter("txtPass");
+ try{
+ Class.forName("com.mysql.jdbc.Driver");
+ Connection con =
+DriverManager.getConnection("jdbc:mysql://localhost:3306/logindb");
+ PreparedStatement stmt = con.prepareStatement("select password from
+user where username=?");
+ stmt.setString(1, uname);
+ ResultSet rs = stmt.executeQuery();
+ if(rs.next()){
+ if(pass.equals(rs.getString(1)))
+ {
+ out.println("<h1>~~~ LOGIN SUCCESSFULLL ~~~ </h1>");
+ }
+ }
+ else{
+ out.println("<h1>User Name not exist !!!!!</h1>");
+ %>
+<jsp:include page="Register.html" ></jsp:include>
+<%
+Downloaded by rajat dalal (rajat@gmail.com)
+lOMoARcPSD|59836559
+ }
+ }catch(Exception e){out.println(e);}
+ %>
+</body></html>

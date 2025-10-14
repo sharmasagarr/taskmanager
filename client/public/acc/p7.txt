@@ -1,0 +1,288 @@
+a) Develop simple EJB application to demonstrate Servlet Hit count using Singleton Session
+Beans.
+Index.html
+<html>
+<head>
+<title>TODO supply a title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale= 1.0">
+<meta http-equiv="Refresh" content="0; URL=ServletClient">
+</head>
+<body>
+<div>TODO write content</div>
+</body>
+</html>
+ServletClient.java
+package servlet;
+import j ava.io.IOException;
+import j ava.io.PrintWriter;
+import j akarta. servlet. ServletException;
+import j akarta. servlet.annotation. Web Servi et;
+import j akarta. servlet. http.HttpServlet;
+import j akarta. servl et. http.HttpServletRequest;
+import j akarta. servl et. http.Http Servi etResponse;
+import ejb.CountServletHitsBean;
+importjakarta.ejb.EJB;
+@WebServlet(name = "ServletClient", urlPatterns = {"/ServletClient"})
+public class ServletClient extends HttpServlet {
+@EJB CountServletHitsBean obj;
+@Override
+protected void service (HttpServletRequest req, HttpServletResponse res) throws ServletException,
+TOException
+{
+res.setContentType("text/html ");
+PrintWriter out=res.getWriter();
+out.print("<b>Number of times this Servlet is accessed </b>: "+obj.getCountO);
+}
+}
+CountServletHitsBean.java
+Package ejb;
+importjakarta.ejb.Singleton;
+import Jakarta.ejb.LocalBean;
+@Singleton
+@LocalBean
+public class CountServletHitsBean {
+privateinthitCount;
+public synchronized int getCount()
+{
+return hitCount++;
+}
+}
+b) Develop simple Marks Entry Application to demonstrate accessing Database using EJB.
+create table marks (id int primary key auto_increment, sname varchar(35), marksl int, marks2 int,
+marks3 int);
+index.jsp
+<¾ @page import=" ejb .MarksEntry Bean"%>
+<¾ @page import="javax.naming.InitialContext"¾>
+<¾ @page contentType= "text/html" pageEncoding="UTF-8 "%>
+<!DOCTYPE html>
+<%!
+private static MarksEntryBean obj;
+public void jsplnit()
+{
+try
+{
+Initial Context i c=new Initial Context();
+obj=(MarksEntryBean )i c.1 ookup("j ava:gl obal/Demo7C-1 . 0-SN AP SHOT /MarksEntry Bean");
+}
+catch(Exception e)
+{
+System. out. println( e );
+}
+}
+%>
+<%
+if(request.getParameter("InsertMarks")!=null)
+{
+String sname;
+int marks], marks2, marks3;
+sname = request.getParameter("sname");
+marks 1 = Integer.parselnt(request.getParameter("m 1 "));
+marks2=lnteger.parselnt(request.getParameter("m2"));
+marks3= Integer. parselnt(request.getParameter("m3 ") );
+obj .addMarks(sname,marks 1,marks2,marks3 );
+out. print("Marks entered successfully .. !!!!");
+}
+%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title> JSP Page</title>
+</head>
+<body>
+<h2>Enter Details</h2>
+<fonn name="result" method="post">
+Enter student's name: <input type='text' name="sname" /><br>
+Enter subject 1 marks: <input type='text' name="m l" /><br>
+Enter subject 2 marks: <input type='text' name="m2" /><br>
+Enter subject 3 marks: <input type='text' name="m3" /><br>
+<input type='submit' name="lnsertMarks" /><br>
+</fonn>
+</body>
+</html>
+MarksEntry Bean.java
+package ejb;
+import java.sql. *;
+import j akarta.ejb. Stateful;
+@Stateful
+public class MarksEntryBean {
+String sname;
+int ml,m2,m3;
+Connection con=null;
+Statement st=null ;
+String query="" ;
+public void addMarks(String sname,int m 1,int m2,int m3)
+{
+try
+{
+Class.forName("com.mysql .cj .j dbc.Driver");
+con=DriverManager.getConnection("jdbc:mysql://localhost:3306/logindb", "root","tiger");
+st=con.createStatement();
+query="insert into marks (sname,marksl ,marks2,marks3) values
+("'+sname+"' "'+ml+'" "'+m2+"' "'+m3+'")"· ' ' ' ' st. executeU pd ate( query);
+System.out.print("Marks entered sucessfully! ! ");
+}
+catch(Excepti on e) {System. out. printl n( e ); }
+}
+}
+c) Develop simple visitor Statistics application using Message Driven Bean [Stateless Session
+Bean].
+Step I:
+Web-> web application-> <Your Roll no> _7C -> select dedicated folders for storing libraries->
+finish.
+lndex.jsp
+<%@page import="javax.jms.JMSException"o/o>
+<%@page import="javax.naming.lnitia!Context"o/o>
+<%@page import="javax.jms.Connection"o/o>
+<%@page import="javax.jms.TextMessage"o/o>
+<%@page import="javax.jms.MessageProducer"o/o>
+<%@page import="javax.jms.Session"o/o>
+<%@page import="javax.jms.Queue"o/o>
+<%@page import="javax.jms.ConnectionFactory"o/o>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%!
+private static ConnectionFactory connectionFactory;
+private static Queue queue;
+Connection connection=null;
+Session mySession=null;
+MessageProducer messageProducer=null;
+T extMessage message=null;
+%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>JSP Page</title>
+</head>
+<body>
+Welcome to My Home Page
+<%
+try{
+Initial Context ic= new Initial Context();
+queue= (Queue)ic.lookup("jms/Queue");
+connectionFactory=(ConnectionFactory)ic.lookup("jms/QueueFactory");
+connection= connectionF actory. createConnection();
+mySession=connection. createSessi on(fal se, Session. AUTO_ ACKNOWLEDGE);
+messageProducer=mySessi on. createProducer( queue);
+message=mySession.createTextMessage();
+message. setT ext(request.getRemoteAddr() );
+messageProducer. send( message);
+}
+catch(JMSException e)
+{
+System.out. println("Exception Occoured "+e.toString());
+}
+%>
+</body>
+</html>
+Step 2
+Open your database logindb
+Create table name-> userstat
+column names are
+Firstvisitdt - timestamp
+Hostname - varchar 30 Primary Key
+Visits - int
+Step 3
+Create a Session Bean named as VisitorStatBean -> Select Stateless-> package name as ejb, do not
+select Local / Remote
+VisitorStatBean.java
+package ejb;
+import java.sql. *;
+import j avax.annotation.PostConstruct;
+import j avax.annotation.PreDestroy;
+import j avax.ejb.MessageDriven;
+import j avax.ejb. Stateless;
+@Stateless
+@MessageDriven
+public class VisitorStatBean {
+private Connection conn=null;
+private ResultSet rs;
+private Statement st=null;
+private String query =null;
+@PostConstruct
+public void connect()
+{
+try {
+Cl ass. for Name(" com.my sq!. cj .j dbc.Dri ver"). new Instance();
+conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/logindb", "root", "tiger");
+}
+catch (Exception e) {
+System .err. pri ntl n( e.getMessage() );
+}
+}
+@PreDestroy
+public void disconnect()
+{
+try {
+conn.close();
+} catch (Exception e) {
+System .err.println( e.getMessage());
+}
+}
+public void addVisitor(String host)
+{
+try {
+st= conn.createStatement();
+query="insert into userstat (hostname, visits) values ("'+host+"',' l ')";
+st. executeU pd ate( query);
+}
+catch (SQLException e)
+{
+try {
+st=con n. create Statement();
+query="update userstat set visits=visits+ 1 where hostname="'+host+"' ";
+st.execute Update( query);
+}
+catch (SQLException ex) {
+System.err.println("Cannot Update"+e.getMessage());
+}
+}
+}
+}
+Step 4
+Right click on Source Packages-> Select New ->Other ->Enterprise Java Bean->
+MessageDrivenBean ->EJB Name: BasicMessageBean -> Package: ejb -> Select Project Destination
+-> Click on Add Button -> Destination Name: jms/Queue -> Destination Type select the option
+Queue->click on OK-> Click on Next ->Activation Configuration Properties should be as it is.->
+Click on Finish
+BasicMessageBean. j ava
+package ejb;
+import j avax.annotation.Resource;
+importjavax.ejb.ActivationConfigProperty;
+import javax.ejb.EJB;
+import j avax.ejb.MessageDriven;
+import j avax. ej b .MessageDrivenContext;
+import javax.jms.JMSException;
+importjavax.jms.Message;
+import j avax.jms.MessageListener;
+importjavax.jms.TextMessage;
+@MessageDriven(activationConfig = {
+@ActivationConfigProperty(propertyName = "destinationLookup", property Value = "jms/Queue"),
+@ActivationConfigProperty(propertyName = "destination Type", property Value=
+"javax.jms.Queue")
+})
+public class BasicMessageBean implements MessageListener {
+@EJB VisitorStatBean vs;
+@Resource
+private MessageDrivenContext mdc;
+public BasicMessageBean() {
+}
+@Override
+public void onMessage(Message message) {
+try {
+if(message instanceof TextMessage ){
+TextMessage msg= (TextMessage) message;
+vs.addVisitor(msg.getText());
+}
+}
+catch (JMSException e) {
+mdc.setRollbackOnly();
+}
+}
+}
+Step 5: Before deploying and running the application, Glassfish Server setting is required.
+Browse the path: Localhost:4848 on any browser.
+Find Resources -> connectors -> Connector Resources
+double click on Connector Resources -> click on 'New' Button -> write JNDI name as ->
+jms/QueryFactory. Find Admin Object Resources and double click on that-> click on 'New' Button
+-> write JNDI name as-> jms/Queue.
+Step 6 run index.jsp file. 

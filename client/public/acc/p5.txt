@@ -1,0 +1,134 @@
+P5:A) Create an html page with fields, eno, name, age, desg,
+salary. Now on submit this data to a JSP page which will
+update the employee table of database with matching eno.
+create table emp(empid varchar(10) PRIMARY KEY, ename varchar(50),
+salary varchar(50),age
+varchar(50) )
+insert into emp values('1','aaa','221234','11')
+insert into emp values('2','bbb','334567','22')
+insert into emp values('3','ccc','44454','33')
+insert into emp values('4','ddd','55123','44')
+---- index.html ---------
+<html>
+<body>
+<form action="UpdateEmp.jsp" >
+ Enter Employee Number<input type="text" name="txtEno" ><br>
+ Enter Name<input type="text" name="txtName" ><br>
+ Enter age<input type="text" name="txtAge" ><br>
+ Enter Salary<input type="text" name="txtSal" ><br>
+<input type="reset" ><input type="submit">
+</form>
+</body>
+</html>
+-------------
+UpdateEmp.java
+<%@page contentType="text/html" import="java.sql.*" %>
+<html><body>
+<h1>Employee Record Update</h1>
+<%
+ String eno=request.getParameter("txtEno");
+ String name=request.getParameter("txtName");
+ String age = request.getParameter("txtAge");
+ String sal = request.getParameter("txtSal");
+ try{
+ Class.forName("com.mysql.jdbc.Driver");
+ Connection con =
+DriverManager.getConnection("jdbc:mysql://localhost:3306/empdb");
+Downloaded by rajat dalal (rajat@gmail.com)
+lOMoARcPSD|59836559
+ PreparedStatement stmt = con.prepareStatement("select * from emp
+where empid=?");
+ stmt.setString(1, eno);
+ ResultSet rs = stmt.executeQuery();
+ if(rs.next()){
+ out.println("<h1>~~~ Employee "+name+" Exist ~~~ </h1>");
+ PreparedStatement pst1= con.prepareStatement("update emp set salary=?
+where empid=?");
+ PreparedStatement pst2= con.prepareStatement("update emp set age=?
+where empid=?");
+ pst1.setString(1, sal); pst1.setString(2, eno);
+ pst2.setString(1, age); pst2.setString(2, eno);
+ pst1.executeUpdate(); pst2.executeUpdate();
+else{
+ out.println("<h1>Employee Record not exist !!!!!</h1>");
+ }
+ }catch(Exception e){out.println(e);}
+ %></body></html>
+OUTPUT:-
+
+Downloaded by rajat dalal (rajat@gmail.com)
+lOMoARcPSD|59836559
+
+
+P5:B) . Create a JSP page to demonstrate the use of Expression
+language.
+Soolution:-
+Index.jsp
+<body>
+<h3>welcome to index page</h3>
+<%
+Downloaded by rajat dalal (rajat@gmail.com)
+lOMoARcPSD|59836559
+session.setAttribute("user","Admin");
+%>
+<%
+Cookie ck=new Cookie("name","mycookie");
+response.addCookie(ck);
+%>
+<form action="ExpressionLanguage.jsp">
+Enter Name:<input type="text" name="name" /><br/><br/>
+<input type="submit" value="Submit"/>
+</form>
+</body>
+ExpressionalLanguage.jsp
+<body>
+Welcome, ${ param.name }
+Session Value is ${ sessionScope.user }
+Cookie name is , ${cookie.name.value}
+</body>
+ELArithemeticOperator.jsp
+<body>
+<%-- arithmetic op --%>
+5*5+4: ${5*5+4} <br>
+1.4E4+1.4: ${1.4E4+1.4}<br>
+10 mod 4: ${10 mod 4}<br>
+15 div 3: ${15 div 3}<br>
+</body>
+Downloaded by rajat dalal (rajat@gmail.com)
+lOMoARcPSD|59836559
+d. ELLogicalOperator.jsp
+<body>
+<%-- LogicalOperator --%>
+<h2>Logical Operator</h2>
+true and true: ${true and true}<br>
+true && false: ${true && false}<br>
+true or true: ${true or true}<br>
+true || false: ${true || false}<br>
+not true: ${not true}<br>
+!false: ${!false}
+</body>
+e. ELRelationalOperator.jsp
+<body>
+<%-- RelationalOperator --%>
+<h2>Relational Operator</h2>
+10.0==10: ${10.0==10} <br>
+10.0 eq 10: ${10.0 eq 10} <br>
+((20*10)!= 200): ${((20*10)!= 200)} <br>
+3 ne 3: ${3 ne 3} <br>
+3.2>=2: ${3.2>=2} <br>
+3.2 ge 2: ${3.2 ge 2} <br>
+2<3: ${2<3} <br>
+4 lt 6: ${4 lt 6} <br>
+2 <= 4: ${2 <= 4} <br>
+4 le 2: ${4 le 2}
+</body>
+Downloaded by rajat dalal (rajat@gmail.com)
+lOMoARcPSD|59836559
+f. ELconditional op
+<body>
+<h2>Conditional Operator</h2>
+The result of 10>2 is: "${(10>1)?'greater':'lesser'}"
+</body>
+g. Empty Operator
+<H1>Empty Operator Example</H1>
+The Value for the Empty operator is:: ${empty "txxt"}
