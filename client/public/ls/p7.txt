@@ -1,0 +1,31 @@
+LCD Pi 400 GPIO
+GND --> GND (Pin 6)
+VCC --> 5V (Pin 4)
+SDA --> SDA (GPIO 2 / Pin 3)
+SCL --> SCL (GPIO 3 / Pin 5)
+
+Step 1: Enable I2C on Raspberry Pi
+sudo raspi-config
+Go to Interface Options → I2C → Enable
+Reboot your Pi
+Step 2: Install Required Packages
+sudo apt update
+sudo apt install i2c-tools python3-smbus
+python3-pip
+pip3 install RPLCD
+Check if the LCD is detected:
+i2cdetect -y 1
+
+Step 3: Test LCD with Python
+CODE:
+from RPLCD.i2c import CharLCD
+from time import sleep
+lcd = CharLCD('PCF8574', 0x27) #
+Change 0x27 if needed
+lcd.write_string("Hello from Pi 400!")
+sleep(3)
+lcd.clear()
+Save this as lcd_test.py and run:
+python3 lcd_test.py
+✅ Your LCD should now display the
+message!
