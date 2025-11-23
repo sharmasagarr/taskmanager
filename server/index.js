@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('Task Manager backend is running');
 });
 
 app.use('/api/users', userRoutes);

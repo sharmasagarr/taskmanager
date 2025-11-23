@@ -39,8 +39,8 @@ const Home = () => {
       const hasFilter = status || assignedToMe || dateFrom || dateTo;
 
       const url = hasFilter
-        ? `https://taskmanager-beige-ten.vercel.app/api/tasks/filter`
-        : `https://taskmanager-beige-ten.vercel.app/api/tasks`;
+        ? `https://taskmanager-server-chi.vercel.app/api/tasks/filter`
+        : `https://taskmanager-server-chi.vercel.app/api/tasks`;
 
       const params = {};
       if (status) params.status = status;
@@ -69,7 +69,7 @@ const Home = () => {
 
   const updateStatus = async (taskId, newStatus) => {
     try {
-      await axios.patch(`https://taskmanager-beige-ten.vercel.app/api/tasks/${taskId}/status`, {
+      await axios.patch(`https://taskmanager-server-chi.vercel.app/api/tasks/${taskId}/status`, {
         status: newStatus,
       }, {
         headers: {
@@ -88,7 +88,7 @@ const Home = () => {
     if (!confirmDelete) return;
 
     try {
-        await axios.delete(`https://taskmanager-beige-ten.vercel.app/api/tasks/${taskId}`, {
+        await axios.delete(`https://taskmanager-server-chi.vercel.app/api/tasks/${taskId}`, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
