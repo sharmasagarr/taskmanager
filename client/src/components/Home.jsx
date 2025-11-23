@@ -102,7 +102,7 @@ const Home = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-    window.location.reload();
+    globalThis.location.reload();
   };
 
   return (
